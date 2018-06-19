@@ -14,4 +14,12 @@
         android:icon="@drawable/common_full_open_on_phone"
         android:title="@string/action_datosbd"
         app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/action_tablabd"
+        android:enabled="true"
+        android:icon="@drawable/common_full_open_on_phone"
+        android:title="Tabla"
+        app:showAsAction="ifRoom">
+
+    </item>
 </menu>

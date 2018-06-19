@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">p3</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="app_name">Trabajin</string>
+    <string name="title_activity">Trabajo</string>
     <string name="menu">Menu</string>
     <string name="action_mapa">Mapa</string>
     <string name="action_datosbd">Datos</string>
