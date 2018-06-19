@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">p3</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="menu">Menu</string>
+    <string name="action_mapa">Mapa</string>
+    <string name="action_datosbd">Datos</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_fragment">Search Fragment</string>
+    <string name="cart_fragment">Cart Fragment</string>
+    <string name="hot_deals_fragment">Hot Deals Fragment</string>
+</resources>
