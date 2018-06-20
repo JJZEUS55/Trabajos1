@@ -11,6 +11,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.facebook.stetho.Stetho;
+
 public class BottomActivity extends AppCompatActivity {
     private BottomNavigationView botView;
     private Fragment fragmento;
@@ -20,6 +22,7 @@ public class BottomActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_bot);
+        Stetho.initializeWithDefaults(this);
 
         botView = findViewById(R.id.bottom_navigation);
         botView.inflateMenu(R.menu.bottom_menu);
