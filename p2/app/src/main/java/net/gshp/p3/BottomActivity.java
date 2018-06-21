@@ -41,6 +41,9 @@ public class BottomActivity extends AppCompatActivity {
                         break;
 
                     case R.id.action_tablabd:
+                        fragmento = new FragmentMaps();
+                        UsoGeo localizacion = new UsoGeo(getBaseContext());
+
                         Toast.makeText(getBaseContext(), "Aun no jala :v" , Toast.LENGTH_SHORT).show();
                         break;
                 }

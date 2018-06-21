@@ -102,7 +102,25 @@ public class DBLista extends SQLiteOpenHelper {
         valoresActualizar.put(COLUMNA_ANSWER, datos.getValue());
 
         db.update(TABLA2_NOMBRE, valoresActualizar, COLUMNA_ID + "=" + datos.getIdCSKU(), null);
+    }
 
+    public boolean isDatosTabla2(){
+        boolean conValor = false;
+        String dato = "";
+        String query = "SELECT * FROM " + TABLA2_NOMBRE
+                + " ASC LIMIT 1";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while(cursor.moveToNext()){
+            dato = cursor.getString(1);
+            if(dato != "0"){
+                conValor = true;
+            }else{
+                conValor = false;
+            }
+        }
+        return conValor;
     }
 
 }

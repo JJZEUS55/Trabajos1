@@ -3,20 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/tvIdSku"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <RadioGroup
-        android:id="@+id/radio_sn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_span="2"
-        android:checkedButton="@+id/radio_btn_select">
 
         <RadioButton
             android:id="@+id/radio_si"
@@ -30,5 +22,4 @@
             android:layout_height="wrap_content"
             android:text="No" />
 
-    </RadioGroup>
 </LinearLayout>

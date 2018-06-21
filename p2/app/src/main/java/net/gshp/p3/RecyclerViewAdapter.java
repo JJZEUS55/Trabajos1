@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,36 +25,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public View layout;
-        public TextView tvIdSku;
-        public RadioGroup radioGroup;
+        protected View layout;
+        private TextView tvIdSku;
+        private RadioButton rbSi;
+        private RadioButton rbNo;
 
 
         public ViewHolder(final View itemView) {
             super(itemView);
             layout = itemView;
             tvIdSku = itemView.findViewById(R.id.tvIdSku);
-            radioGroup = itemView.findViewById(R.id.radio_sn);
-
-
-
-            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                    //Csku aux = new Csku();
-                    int seleccionado = radioGroup.getCheckedRadioButtonId();
-                    RadioButton rbSelect = itemView.findViewById(seleccionado);
-                    FragmentLista.listaCsku.get(getAdapterPosition()).setValue(rbSelect.getText().toString());
-                    Toast.makeText(radioGroup.getContext(), "ID SKU: " + FragmentLista.listaCsku.get(getAdapterPosition()).getIdCSKU() + " Actualizado a: " + rbSelect.getText(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            rbSi = itemView.findViewById(R.id.radio_si);
+            rbNo = itemView.findViewById(R.id.radio_no);
         }
 
-    }
-
-    public void add(int position, Csku item) {
-        mDataSku.add(position, item);
-        notifyItemInserted(position);
     }
 
 
@@ -74,6 +59,39 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Csku dato = mDataSku.get(position);
         holder.tvIdSku.setText("C_SKU ID: " + dato.getIdCSKU());
+
+        holder.rbSi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                String valor = "";
+                if(isChecked){
+                    valor = holder.rbSi.getText().toString();
+                    holder.rbNo.setChecked(false);
+                    mDataSku.get(position).setValue("" + valor);
+                }
+            }
+        });
+
+        holder.rbNo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                String valor = "";
+                if(isChecked){
+                    valor = holder.rbNo.getText().toString();
+                    holder.rbSi.setChecked(false);
+                    mDataSku.get(position).setValue(valor);
+                }
+            }
+        });
+
+        if (dato.getValue().equals("Si")) {
+            holder.rbSi.setChecked(true);
+        } else if (dato.getValue().equals("No")) {
+            holder.rbNo.setChecked(true);
+        }else{
+            holder.rbSi.setChecked(false);
+            holder.rbNo.setChecked(false);
+        }
 
     }
 
