@@ -45,6 +45,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".UsoGeo"
+            android:process=":geo_service" />
     </application>
+
 
 </manifest>

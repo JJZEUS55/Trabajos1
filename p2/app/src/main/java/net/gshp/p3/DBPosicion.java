@@ -27,7 +27,7 @@ public class DBPosicion extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String crearTabla = "CREATE TABLE " + TABLA_GEO
-                + " ( " + COLUMNA_ID + " INTEGER PRIMARY KEY, "
+                + " ( " + COLUMNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                 + COLUMNA_LAT + " TEXT, "
                 + COLUMNA_LON + " TEXT, "
                 +COLUMNA_TIME + " TEXT " + " )";

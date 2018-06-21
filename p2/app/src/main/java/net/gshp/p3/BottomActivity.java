@@ -1,5 +1,13 @@
 package net.gshp.p3;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -12,11 +20,20 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
+import java.time.LocalTime;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BottomActivity extends AppCompatActivity {
     private BottomNavigationView botView;
     private Fragment fragmento;
     private FragmentManager fragmentManager;
+
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +45,7 @@ public class BottomActivity extends AppCompatActivity {
         botView.inflateMenu(R.menu.bottom_menu);
         fragmentManager = getSupportFragmentManager();
         botView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
@@ -42,9 +60,11 @@ public class BottomActivity extends AppCompatActivity {
 
                     case R.id.action_tablabd:
                         fragmento = new FragmentMaps();
-                        UsoGeo localizacion = new UsoGeo(getBaseContext());
+                        //startService(new Intent(this, UsoGeo.class));
+                        //UsoGeo localizacion = new UsoGeo(getBaseContext());
 
-                        Toast.makeText(getBaseContext(), "Aun no jala :v" , Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getBaseContext(), "Aun no jala :v", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 final FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -54,4 +74,5 @@ public class BottomActivity extends AppCompatActivity {
             }
         });
     }
+
 }
