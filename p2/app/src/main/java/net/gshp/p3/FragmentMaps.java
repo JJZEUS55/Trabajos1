@@ -30,6 +30,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.time.LocalTime;
 
+import static android.content.Context.LOCATION_SERVICE;
+
 public class FragmentMaps extends Fragment implements OnMapReadyCallback, android.location.LocationListener {
 
     private GoogleMap mMap;
@@ -51,7 +53,7 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, androi
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
         LatLng trabajo = new LatLng(19.4323372, -99.194773);
         mMap.addMarker(new MarkerOptions().position(trabajo).title("Marcador en el trabajo"));
 
@@ -59,7 +61,7 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, androi
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(trabajo));
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -69,22 +71,26 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, androi
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0, this);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0,this );
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0, this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, this);
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onLocationChanged(Location location) {
-        Log.d("LOCATION CHANGED", "Entrando al LC");
-        coordenadas = new Geo();
-        //LocalTime hora = LocalTime.now();
-        String hora = "1234";
-        coordenadas.setLat("" + location.getLatitude());
-        coordenadas.setLon("" + location.getLongitude());
-        coordenadas.setTime(hora.toString());
-        db.insertarValores(coordenadas);
-        Toast.makeText(getContext(), "Se han guardado correctamente los datos", Toast.LENGTH_SHORT).show();
+        if (getActivity() != null) {
+            Log.d("LOCATION CHANGED", "Entrando al LC");
+            coordenadas = new Geo();
+            LocalTime hora = LocalTime.now();
+            // String hora = "1234";
+            coordenadas.setLat("" + location.getLatitude());
+            coordenadas.setLon("" + location.getLongitude());
+            coordenadas.setTime(hora.toString());
+            db.insertarValores(coordenadas);
+
+            Toast.makeText(getActivity(), "Se han guardado correctamente los datos", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
