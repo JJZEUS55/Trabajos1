@@ -29,6 +29,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -82,11 +85,16 @@ public class FragmentMaps extends Fragment implements OnMapReadyCallback, androi
         if (getActivity() != null) {
             Log.d("LOCATION CHANGED", "Entrando al LC");
             coordenadas = new Geo();
-            LocalTime hora = LocalTime.now();
+            //LocalTime hora = LocalTime.now();
+            Date date = new Date();
+            Calendar hora = GregorianCalendar.getInstance();
+            hora.setTime(date);
+            String txtHora = "" + hora.get(Calendar.HOUR_OF_DAY) + " : " + hora.get(Calendar.MINUTE) + " : " + hora.get(Calendar.SECOND);
+
             // String hora = "1234";
             coordenadas.setLat("" + location.getLatitude());
             coordenadas.setLon("" + location.getLongitude());
-            coordenadas.setTime(hora.toString());
+            coordenadas.setTime(txtHora);
             db.insertarValores(coordenadas);
 
             Toast.makeText(getActivity(), "Se han guardado correctamente los datos", Toast.LENGTH_SHORT).show();

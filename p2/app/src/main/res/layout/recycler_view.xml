@@ -12,7 +12,7 @@
         android:background="@color/colorPrimary"
         android:theme="@style/AppTheme"
         app:title="@string/title_activity"
-        app:titleTextColor="@color/colorWhite">
+        app:titleTextColor="@color/colorWhite"
 
         <Button
             android:id="@+id/xbtnGuardar"
